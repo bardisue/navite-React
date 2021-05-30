@@ -1,24 +1,52 @@
-import React from 'react';
+import * as React from 'react';
+import 'react-native-gesture-handler';
+
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import CityList from './CityList';
+import WeatherDetailScreen from './WeatherDetailScreen';
 
-// after `expo install react-native-safe-area-context`.
-import { SafeAreaView } from 'react-native-safe-area-context';
+const HomeScreen = ({ navigation }) => (
+  <View style={styles.container}>
+    <CityList navigation={navigation} />
+    <StatusBar style="auto" />
+  </View>
+);
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <SafeAreaView style={styles.container}>
-        <CityList/>
-        <StatusBar style="auto" />
-      </SafeAreaView>
-    );
-  }
- }
+const DetailScreen = ({ navigation, route }) => (
+  <View style={styles.container}>
+    <WeatherDetailScreen navigation={navigation} route={route} />
+    <StatusBar style="auto" />
+  </View>
+);
+
+const Stack = createStackNavigator();
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
 });
+
+export default class App extends React.Component {
+  render() {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{ title: 'Cities' }}
+          />
+          <Stack.Screen
+            name="Detail"
+            component={DetailScreen}
+            options={{ title: 'Weather' }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
+}
