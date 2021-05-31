@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 
-const API_KEY = '{24eaa5c5e1c7ed9dc26b06e04bd2dc45}';
+const API_KEY = '24eaa5c5e1c7ed9dc26b06e04bd2dc45';
 const queryUrl = (city) => `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`
 
 export default class WeatherDetailScreen extends React.Component {
