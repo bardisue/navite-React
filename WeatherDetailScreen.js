@@ -5,15 +5,15 @@ const API_KEY = '{24eaa5c5e1c7ed9dc26b06e04bd2dc45}';
 const queryUrl = (city) => `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`
 
 export default class WeatherDetailScreen extends React.Component {
-   constructor(props) {
-     super(props);
+  constructor(props) {
+    super(props);
 
-     this.state = {
-       isLoading: true,
-     };
-   }
+    this.state = {
+      isLoading: true,
+    };
+  }
 
-   componentDidMount() {
+  componentDidMount() {
     const {
       route: {
         params: { city },
@@ -32,14 +32,15 @@ export default class WeatherDetailScreen extends React.Component {
   }
 
   render() {
-      const {
-        route: {
-          params: { city },
-        },
-        navigation,
-      } = this.props;
+    const {
+      route: {
+        params: { city },
+      },
+      navigation,
+    } = this.props;
 
-      navigation.setOptions({ title: `Weather Information: ${city}` });
+    navigation.setOptions({ title: `Weather Information: ${city}` });
+
     if (this.state.isLoading) {
       return (
         <View style={styles.container}>
@@ -49,11 +50,10 @@ export default class WeatherDetailScreen extends React.Component {
     }
 
     let celsius = this.state.main.temp - 273.15;
-    console.log('route = ', city);
 
     return (
       <View style={styles.container}>
-         <Text>온도: {celsius.toFixed(1)}</Text>
+        <Text>온도: {celsius.toFixed(1)}</Text>
       </View>
     );
   }
